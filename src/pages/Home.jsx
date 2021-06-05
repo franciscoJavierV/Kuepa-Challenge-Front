@@ -21,11 +21,11 @@ const Home = () => {
       role : role,
       owner: userName,
       picture: picture,
-    };
+    };   //constante en el componente para efectos de la prueba ya que no se uso -env
     window.firebase.database().ref(`message/${newMessage.id}`).set(newMessage);
    // dispatch(sendMessage(newMessage));
   };
-
+  //firebace connection on ref message
   useEffect(() => {
     window.firebase
       .database()

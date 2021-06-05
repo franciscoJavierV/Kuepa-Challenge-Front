@@ -12,7 +12,7 @@ import { loadState, saveState , } from "./actions/State.js";
 //pages
 const state =
   {
-    user: loadState(),
+    user: loadState(), //get auth data from cookies 
     history : [] ,
   } || {};
 
@@ -30,7 +30,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <App />
-    </Router>{" "}
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

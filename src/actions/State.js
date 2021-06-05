@@ -1,6 +1,5 @@
 //extracting de cookies values and putting them on the state 
 //this was made to solve re redirect problem when login 
-//esto le falla a diana
 
 export const loadState = () => {
   try {
