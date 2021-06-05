@@ -15,14 +15,16 @@ const Home = () => {
 
   const sendNewMessage = (e) => {
     e.preventDefault();
-    const newMessage = {
-      id: history.length,
-      text: message,
-      role : role,
-      owner: userName,
-      picture: picture,
-    };   //constante en el componente para efectos de la prueba ya que no se uso -env
-    window.firebase.database().ref(`message/${newMessage.id}`).set(newMessage);
+    if(message !== ""){   
+      const newMessage = {
+        id: history.length,
+        text: message,
+        role : role,
+        owner: userName,
+        picture: picture,
+      };   //constante en el componente para efectos de la prueba ya que no se uso -env
+      window.firebase.database().ref(`message/${newMessage.id}`).set(newMessage);
+    }
    // dispatch(sendMessage(newMessage));
   };
   //firebace connection on ref message
@@ -36,9 +38,6 @@ const Home = () => {
           dispatch(sendMessage(currentMessage));
           setmesagge("")
       });
-    return () => {
-        console.log('effect')
-    };
   }, [dispatch]);
 
   return (
