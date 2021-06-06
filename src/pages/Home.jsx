@@ -59,6 +59,7 @@ const Home = () => {
       <div className="chat__container">
       <h3 className="space text-center">Chat de la sesion</h3>
       <div className="chat__messages">
+        <p>Inicia la conversacion</p>
         {history ? (
           history.map((data) => {
             return (
