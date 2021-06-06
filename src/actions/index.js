@@ -33,14 +33,14 @@ export const loginUser = (payload, redirectUrl) => {
     return (dispatch) => {
         var config = {
             method: "post",
-            url: "http://localhost:3000/api/auth/provider",
+            url: "http://localhost:3000/api/auth/provider", //back url  hardcodeada par apropositos de la prueba 
             data: data,
         };
         axios(config)
             .then(({
                 data
             }) => {
-                console.log(data.user)
+                //cookies
                 document.cookie = `email=${data.user.email}`;
                 document.cookie = `name=${data.user.name}`;
                 document.cookie = `picture=${data.user.picture.url}`;

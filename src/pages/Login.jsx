@@ -4,12 +4,11 @@ import FacebookLogin from "react-facebook-login";
 import { loginUser } from '../actions/index'
 import { useState } from "react";
 
-export const Login = (props) => {
+export const Login = () => {
   const dispatch = useDispatch({});
   const [userRole, setUserRole] = useState('estudiante');
   
-
-
+  //faceboook auth callback
   const responseFacebook = (response) => {
     const data = {
       name: response.name,

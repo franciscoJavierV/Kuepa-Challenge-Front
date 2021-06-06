@@ -15,17 +15,19 @@ const Home = () => {
 
   const sendNewMessage = (e) => {
     e.preventDefault();
-    const newMessage = {
-      id: history.length,
-      text: message,
-      role : role,
-      owner: userName,
-      picture: picture,
-    };
-    window.firebase.database().ref(`message/${newMessage.id}`).set(newMessage);
+    if(message !== ""){   
+      const newMessage = {
+        id: history.length,
+        text: message,
+        role : role,
+        owner: userName,
+        picture: picture,
+      };   //constante en el componente para efectos de la prueba ya que no se uso -env
+      window.firebase.database().ref(`message/${newMessage.id}`).set(newMessage);
+    }
    // dispatch(sendMessage(newMessage));
   };
-
+  //firebace connection on ref message
   useEffect(() => {
     window.firebase
       .database()
@@ -36,9 +38,6 @@ const Home = () => {
           dispatch(sendMessage(currentMessage));
           setmesagge("")
       });
-    return () => {
-        console.log('effect')
-    };
   }, [dispatch]);
 
   return (
@@ -60,13 +59,14 @@ const Home = () => {
       <div className="chat__container">
       <h3 className="space text-center">Chat de la sesion</h3>
       <div className="chat__messages">
+        <p>Inicia la conversacion</p>
         {history ? (
           history.map((data) => {
             return (
               <div key={data.id} className="chat__mesagge">
-               { <span className="info">{data.role}</span>  || "no role"} { <span className="info">{data.owner}</span>   ||"no owner"}
+               { <span className="info">{data.role || 'usuario no registrado'}</span>  || "no role"} { <span className="info">{data.owner}</span>   ||"no owner"}
                <div className="text-center data-msg">
-                { <img className="picture" src={data.picture} alt={data.owner} /> } 
+                { <img className="picture" src={data.picture || 'https://frontprueba.s3.us-east-2.amazonaws.com/images.png'} alt={data.owner || 'anonimo'} /> } 
                  <p className="mg-auto">{data.text}</p> 
                </div>  
               </div>
@@ -83,6 +83,7 @@ const Home = () => {
           <input
             type="text"
             className="input"
+            required
             value={message}
             placeholder="Ingresa tu mensaje"
             onChange={(e) => {
